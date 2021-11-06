@@ -1,0 +1,91 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04/11/2021, 09:16:11
+    Author     : Mikael
+*/
+
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: Arial, sans-serif, cursive; 
+    text-decoration: none;    
+}
+div.container{
+    width: 100%;
+    height: 100%;
+}
+/*Configurações do cabeçalho*/
+div.container div.header{
+    background-color: white;
+    justify-content: center;   
+    z-index: 1;
+    width: 100%;
+    height: 200px;
+    box-shadow: 3px 0px 5px black;
+}
+div.container div.header header.cabecalho{
+    text-align: center;      
+    margin: auto;   
+}
+div.container div.header header.cabecalho img{
+    width: 200px;
+    height: 200px;
+}
+nav.menu {
+    font-family: Arial, sans-serif, cursive;
+    font-weight: bold;    
+    height: 20px;
+    width: 280px;
+    background-color: white;
+    z-index: 2;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 1px 1px 1px black , -1px 1px 1px #000000;
+    background-color: white;
+    
+}
+nav a{
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+nav a:link{
+    color: #5C5A4C;
+}
+nav a:hover{
+    color: grey;
+}
+/*Fim configurações do cabeçalho*/
+/*Configuração conteúdo*/
+.divCentral{
+    width: 100%; 
+    background-color: #5C5A4C;
+}
+div.divCentral main div.conteudo{
+    width: 800px;
+    margin: auto; 
+    background-color: #cccccc;
+    padding: 50px 15px 15px 15px;
+    
+}
+/*Fim configuração conteúdo*/
+/*Configuração rodapé*/
+.footer{    
+    height: 50px;
+    background-color: black;    
+}
+.footer footer{    
+    color: white;
+    text-align: center;
+    padding-top: 15px; 
+}
+/*Fim configuração rodapé*/
