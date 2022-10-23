@@ -39,6 +39,7 @@ public class UniPavaoController {
     @PostMapping(value = "/campus/cadastro")
     public ResponseEntity<Campus> cadastrarCampus(@RequestBody Campus campus) {
         Campus _campus = uniPavaoService.cadastrarCampus(campus);
+        logger.info("Campus cadastrado com sucesso");
         return ResponseEntity.ok().body(_campus);
     }
 
@@ -46,6 +47,7 @@ public class UniPavaoController {
     public ResponseEntity<Disciplina> cadastrarDisciplina(@RequestBody Disciplina disciplina,
                                                           @RequestParam(name = "idCampus") Long idCampus) {
         Disciplina _disciplina = uniPavaoService.cadastrarDisciplina(disciplina, idCampus);
+        logger.info("Disciplina cadastrada com sucesso");
         return ResponseEntity.ok().body(_disciplina);
     }
 }
