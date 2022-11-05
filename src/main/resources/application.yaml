@@ -8,6 +8,24 @@ server:
   servlet:
     context-path: /universidade
 spring:
+  kafka:
+    consumer:
+      enable-auto-commit: true
+      allow-auto-create-topics: true
+      bootstrap-servers: broker:19092
+      group-id: group_id
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    producer:
+      offset-storage:
+          topic: topico-teste
+      status-storage:
+          topic: topico-teste
+      acks: all
+      client-id: teste-kafka
+      bootstrap-servers: 192.168.100.22:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:bancoUniPAvao

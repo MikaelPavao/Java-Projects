@@ -7,19 +7,26 @@ import br.com.entity.Disciplina;
 import br.com.entity.enuns.DisciplinasEnum;
 import br.com.service.UniPavaoService;
 import lombok.RequiredArgsConstructor;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
 public class UniPavaoController {
     private ConfigLogger logger = ConfigLogger.getLogger();
     private final UniPavaoService uniPavaoService;
+
+    @Autowired
+    private KafkaTemplate<String,String> kafkaTemplate;
 
     @PostMapping(value = "/aluno/Disciplina/cadastro")
     public ResponseEntity<Aluno> cadastroDisciplinaAluno(@RequestBody Aluno aluno,
@@ -46,8 +53,11 @@ public class UniPavaoController {
     @PostMapping(value = "/disciplina/cadastro")
     public ResponseEntity<Disciplina> cadastrarDisciplina(@RequestBody Disciplina disciplina,
                                                           @RequestParam(name = "idCampus") Long idCampus) {
-        Disciplina _disciplina = uniPavaoService.cadastrarDisciplina(disciplina, idCampus);
+//        Disciplina _disciplina = uniPavaoService.cadastrarDisciplina(disciplina, idCampus);
+        ProducerRecord<String, String> mensagem_enviada = new ProducerRecord<>("topico-teste", UUID.randomUUID().toString(), "Mensagem enviada");
+        kafkaTemplate.send(mensagem_enviada);
         logger.info("Disciplina cadastrada com sucesso");
-        return ResponseEntity.ok().body(_disciplina);
+        return ResponseEntity.ok().body(disciplina);
     }
+
 }
