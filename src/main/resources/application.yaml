@@ -12,17 +12,15 @@ spring:
     consumer:
       enable-auto-commit: true
       allow-auto-create-topics: true
-      bootstrap-servers: broker:19092
-      group-id: group_id
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      bootstrap-servers: 192.168.100.22:9092
+      group-id: group_id_uni_pavao
     producer:
       offset-storage:
-          topic: topico-teste
+          topic: topico_uni_pavao
       status-storage:
-          topic: topico-teste
+          topic: topico_uni_pavao
       acks: all
-      client-id: teste-kafka
+      client-id: uni_pavao_id
       bootstrap-servers: 192.168.100.22:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

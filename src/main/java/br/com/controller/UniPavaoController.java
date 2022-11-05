@@ -11,6 +11,7 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
+
+import static br.com.DefaultConstants.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -54,10 +57,15 @@ public class UniPavaoController {
     public ResponseEntity<Disciplina> cadastrarDisciplina(@RequestBody Disciplina disciplina,
                                                           @RequestParam(name = "idCampus") Long idCampus) {
 //        Disciplina _disciplina = uniPavaoService.cadastrarDisciplina(disciplina, idCampus);
-        ProducerRecord<String, String> mensagem_enviada = new ProducerRecord<>("topico-teste", UUID.randomUUID().toString(), "Mensagem enviada");
+        ProducerRecord<String, String> mensagem_enviada = new ProducerRecord<>(DEFAULT_TOPIC, UUID.randomUUID().toString(), idCampus.toString());
         kafkaTemplate.send(mensagem_enviada);
         logger.info("Disciplina cadastrada com sucesso");
         return ResponseEntity.ok().body(disciplina);
+    }
+
+    @KafkaListener(id = CLIENT_ID,groupId = GROUP_ID,topics = DEFAULT_TOPIC)
+    public void ouvinteTeste(String msg){
+        logger.info("Mensagem recebida: " + msg);
     }
 
 }
